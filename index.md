@@ -1,0 +1,76 @@
+---
+title       : Economic Freedom Analytics
+subtitle    : A small presentation
+author      : Thiago F Pappacena
+job         : Software Developer
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## The Site
+
+* The site URL is http://pappacena.shinyapps.io/EconomicFreedomAnalytics
+
+* It was made using Shiny and deployed to http://ShinyApps.io.
+
+* All data is publicly available at http://www.heritage.org
+
+* The source code is available at https://github.com/pappacena/EconomicFreedomAnalytics
+
+--- .class #id 
+
+## Reproducibility Disclaimer
+
+* The source code available is not downloading the needed data from Heritage Foundation website
+
+* The download is made manualy, due to Heritage Foundation's website structure.
+
+* There were no much time to hack deeper into their Javascript :)
+
+* You can find the data at http://www.heritage.org/index/explore (export "2014 Index Data" and "2014 Macro-conomic data" to Excel, and put it on "data" directory of the project)
+
+--- .class #id 
+
+## Used tools
+
+* Everything was developed using R, RStudio and Shiny
+
+* rCharts was used to create the charts
+
+* The 1st chart is using Morris library
+
+* The 2nd and 3rd chart are using HighCharts
+
+* The 2dn and 3rd chart should to be one, but I could not change the tooltip in time to include the countries name. rCharts can be tricky sometimes. :)
+
+--- .class #id 
+## Encoding Note
+
+* An encoding problem was found at shinyapp deploy
+
+* The app was working right localy, but encoding problems prevent it from working when deployed to server
+
+* The "solution" was to remove non-ascii chars using iconv, like the following:
+
+
+```r
+data <- c("Côte d'Ivoire", "Brazil", "Argentina")
+print(data)
+```
+
+```
+## [1] "Côte d'Ivoire" "Brazil"         "Argentina"
+```
+
+```r
+print(iconv(data, "utf8", "ascii", "?"))
+```
+
+```
+## [1] "C??te d'Ivoire" "Brazil"         "Argentina"
+```
+
